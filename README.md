@@ -91,8 +91,11 @@ Essa etapa foi implementada com `Pipeline` e `ColumnTransformer`, tornando o pro
 Foram treinados e comparados os seguintes modelos:
 
 - Logistic Regression
+- Logistic Regression com balanceamento de classes
 - Random Forest
+- Random Forest com balanceamento de classes
 - Gradient Boosting
+- HistGradientBoosting
 
 As métricas principais utilizadas foram:
 
@@ -100,6 +103,11 @@ As métricas principais utilizadas foram:
 - `F1 Macro`
 
 A escolha do melhor modelo foi baseada principalmente no **F1 Macro**, por ser mais adequado para um cenário com classes desbalanceadas.
+
+Na versão final do projeto, o melhor desempenho foi obtido com o modelo **HistGradientBoostingClassifier**, alcançando:
+
+- `Accuracy`: **0.9275**
+- `F1 Macro`: **0.6724**
 
 ### 4. Registro de Experimentos com MLflow
 
@@ -229,6 +237,13 @@ Entre os principais resultados obtidos:
 - registro dos experimentos com MLflow
 - salvamento do melhor modelo
 - criação de uma interface web interativa para uso do sistema
+- melhoria do desempenho do pipeline após uma segunda rodada de experimentos
+
+### Melhor modelo final
+
+- Modelo: `hist_gradient_boosting`
+- Accuracy: `0.9275`
+- F1 Macro: `0.6724`
 
 ## Checklist do Projeto
 

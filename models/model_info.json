@@ -1,5 +1,5 @@
 {
-    "model_name": "gradient_boosting",
-    "accuracy": 0.9205,
-    "f1_macro": 0.5967662719039442
+    "model_name": "hist_gradient_boosting",
+    "accuracy": 0.9275,
+    "f1_macro": 0.6723598553063083
 }

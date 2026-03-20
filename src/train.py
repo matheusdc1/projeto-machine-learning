@@ -5,7 +5,11 @@ import joblib
 import mlflow
 import mlflow.sklearn
 
-from sklearn.ensemble import GradientBoostingClassifier, RandomForestClassifier
+from sklearn.ensemble import (
+    GradientBoostingClassifier,
+    HistGradientBoostingClassifier,
+    RandomForestClassifier,
+)
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, classification_report, f1_score
 from sklearn.pipeline import Pipeline
@@ -55,11 +59,22 @@ def main():
 
     models = {
         "logistic_regression": LogisticRegression(max_iter=1000),
+        "logistic_regression_balanced": LogisticRegression(
+            max_iter=1000,
+            class_weight="balanced"
+        ),
         "random_forest": RandomForestClassifier(
             n_estimators=200,
             random_state=42,
         ),
+        "random_forest_balanced": RandomForestClassifier(
+            n_estimators=300,
+            random_state=42,
+            class_weight="balanced",
+            min_samples_leaf=2,
+        ),
         "gradient_boosting": GradientBoostingClassifier(random_state=42),
+        "hist_gradient_boosting": HistGradientBoostingClassifier(random_state=42),
     }
 
     mlflow.set_experiment(EXPERIMENT_NAME)
@@ -83,14 +98,25 @@ def main():
 
             mlflow.log_param("model_name", model_name)
 
-            if model_name == "logistic_regression":
+            if model_name in ["logistic_regression", "logistic_regression_balanced"]:
                 mlflow.log_param("max_iter", 1000)
+                if model_name == "logistic_regression_balanced":
+                    mlflow.log_param("class_weight", "balanced")
 
             if model_name == "random_forest":
                 mlflow.log_param("n_estimators", 200)
                 mlflow.log_param("random_state", 42)
 
+            if model_name == "random_forest_balanced":
+                mlflow.log_param("n_estimators", 300)
+                mlflow.log_param("random_state", 42)
+                mlflow.log_param("class_weight", "balanced")
+                mlflow.log_param("min_samples_leaf", 2)
+
             if model_name == "gradient_boosting":
+                mlflow.log_param("random_state", 42)
+
+            if model_name == "hist_gradient_boosting":
                 mlflow.log_param("random_state", 42)
 
             mlflow.log_metric("accuracy", metrics["accuracy"])
