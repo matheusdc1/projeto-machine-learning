@@ -283,6 +283,6 @@ Entre os principais resultados obtidos:
 
 ### 8. Publicação
 
-- [ ] Subir para GitHub
-- [ ] Fazer deploy público
+- [x] Subir para GitHub
+- [x] Fazer deploy público
 - [ ] Gravar vídeo pitch
