@@ -1,4 +1,15 @@
-﻿# Projeto de Machine Learning - Qualidade Ambiental
+﻿---
+title: Qualidade Ambiental ML
+emoji: 🌿
+colorFrom: green
+colorTo: blue
+sdk: docker
+sdk_version: "1.0.0"
+app_file: app/app.py
+pinned: false
+---
+
+# Projeto de Machine Learning - Qualidade Ambiental
 
 ## Visão Geral
 
@@ -195,9 +206,9 @@ http://127.0.0.1:5000
 
 ### 5. Executar a aplicação web
 
-```bash
-streamlit run app/app.py
-```
+A aplicação está disponível publicamente em:
+
+https://huggingface.co/spaces/matheusdc1/qualidade-ambiental-ml
 
 ## Como Usar a Aplicação
 
