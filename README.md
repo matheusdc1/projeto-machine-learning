@@ -109,6 +109,23 @@ Na versão final do projeto, o melhor desempenho foi obtido com o modelo **HistG
 - `Accuracy`: **0.9275**
 - `F1 Macro`: **0.6724**
 
+### Comparação final dos modelos
+
+| Modelo | Accuracy | F1 Macro |
+|---|---:|---:|
+| Logistic Regression | 0.7630 | 0.4676 |
+| Logistic Regression com balanceamento | 0.6730 | 0.5424 |
+| Random Forest | 0.9065 | 0.5670 |
+| Random Forest com balanceamento | 0.9190 | 0.6291 |
+| Gradient Boosting | 0.9205 | 0.5968 |
+| HistGradientBoosting | **0.9275** | **0.6724** |
+
+### Interpretação dos resultados
+
+O projeto apresentou desempenho elevado em termos de acurácia global, indicando boa capacidade de classificação geral. No entanto, como o dataset possui classes desbalanceadas, o `F1 Macro` foi adotado como métrica principal de decisão, pois avalia de forma mais justa o desempenho em todas as classes, inclusive nas menos representadas.
+
+Esse critério foi importante porque permitiu escolher um modelo não apenas com bom desempenho médio, mas também com melhor equilíbrio entre as categorias da variável alvo.
+
 ### 4. Registro de Experimentos com MLflow
 
 Os experimentos foram rastreados com `MLflow`, registrando:
@@ -131,6 +148,14 @@ A interface também exibe:
 - o F1 Macro do melhor modelo
 - probabilidades por classe
 - cenários prontos para teste
+
+### Área para prints da aplicação
+
+Adicionar nesta seção:
+
+- print da tela inicial da aplicação
+- print de uma previsão realizada
+- print do gráfico de probabilidades por classe
 
 Além disso, a página contém o aviso obrigatório da atividade:
 
@@ -244,6 +269,28 @@ Entre os principais resultados obtidos:
 - Modelo: `hist_gradient_boosting`
 - Accuracy: `0.9275`
 - F1 Macro: `0.6724`
+
+## Limitações e Trabalhos Futuros
+
+Apesar dos bons resultados obtidos, o projeto apresenta algumas limitações importantes:
+
+- o conjunto de dados utilizado é ilustrativo e educacional
+- existe desbalanceamento entre as classes da variável alvo
+- algumas previsões em cenários muito incomuns podem não seguir uma interpretação totalmente intuitiva
+- o desempenho em classes raras ainda pode ser melhorado
+
+Como possibilidades de evolução futura, poderiam ser exploradas:
+
+- técnicas de reamostragem, como `SMOTE`
+- ajuste fino de hiperparâmetros com `GridSearchCV` ou `RandomizedSearchCV`
+- inclusão de novas variáveis ambientais
+- uso de dados reais para aumentar a robustez do sistema
+
+## Conclusão
+
+O projeto atendeu à proposta de construir um pipeline completo de Machine Learning, passando por todas as etapas centrais de um fluxo real: análise exploratória, preparação dos dados, modelagem, rastreamento de experimentos, escolha do melhor modelo, criação de interface e deploy público.
+
+Além disso, a segunda rodada de experimentos contribuiu para melhorar o desempenho do sistema, resultando na escolha do modelo `HistGradientBoosting`, que apresentou o melhor equilíbrio entre desempenho global e qualidade de classificação entre as diferentes classes.
 
 ## Checklist do Projeto
 

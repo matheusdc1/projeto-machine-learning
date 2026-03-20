@@ -122,7 +122,7 @@ def main():
             mlflow.log_metric("accuracy", metrics["accuracy"])
             mlflow.log_metric("f1_macro", metrics["f1_macro"])
 
-            mlflow.sklearn.log_model(pipeline, name="model")
+           # mlflow.sklearn.log_model(pipeline, name="model")
 
             print(f"\nModelo: {model_name}")
             print(f"Accuracy: {metrics['accuracy']:.4f}")
