@@ -149,14 +149,16 @@ A interface também exibe:
 - probabilidades por classe
 - cenários prontos para teste
 
-### Área para prints da aplicação
+### Prints da aplicação
 
-Adicionar nesta seção:
 
-- print da tela inicial da aplicação
-- print de uma previsão realizada
-- print do gráfico de probabilidades por classe
-
+- Tela inicial da aplicação
+  <img src="https://i.imgur.com/MYoOAEh.png" alt="Tela inicial" />
+- Print de uma previsão realizada
+  <img src="https://i.imgur.com/9VfaH2c.png" alt="Previsao" />
+- Print do gráfico de probabilidades por classe
+  <img src="https://i.imgur.com/GoIdgab.png" alt="Grafico" />
+  
 Além disso, a página contém o aviso obrigatório da atividade:
 
 > Este conteúdo é destinado apenas para fins educacionais. Os dados exibidos são ilustrativos e podem não corresponder a situações reais.
@@ -347,4 +349,3 @@ Além disso, a segunda rodada de experimentos contribuiu para melhorar o desempe
 
 - [x] Subir para GitHub
 - [x] Fazer deploy público
-- [ ] Gravar vídeo pitch
