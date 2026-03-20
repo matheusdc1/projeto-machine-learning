@@ -1,0 +1,5 @@
+{
+    "model_name": "gradient_boosting",
+    "accuracy": 0.9205,
+    "f1_macro": 0.5967662719039442
+}

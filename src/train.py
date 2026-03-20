@@ -1,8 +1,8 @@
 import os
+import json
 import joblib
 import mlflow
 import mlflow.sklearn
-import pandas as pd
 
 from sklearn.pipeline import Pipeline
 from sklearn.metrics import accuracy_score, f1_score, classification_report
@@ -20,6 +20,7 @@ from data_prep import (
 
 DATA_PATH = "data/dataset_ambiental.csv"
 MODEL_OUTPUT_PATH = "models/best_model.pkl"
+MODEL_INFO_PATH = "models/model_info.json"
 EXPERIMENT_NAME = "qualidade_ambiental_classificacao"
 
 
@@ -65,6 +66,7 @@ def main():
     best_model_name = None
     best_model_pipeline = None
     best_f1_macro = -1
+    best_accuracy = -1
 
     for model_name, model in models.items():
         with mlflow.start_run(run_name=model_name):
@@ -104,15 +106,27 @@ def main():
 
             if metrics["f1_macro"] > best_f1_macro:
                 best_f1_macro = metrics["f1_macro"]
+                best_accuracy = metrics["accuracy"]
                 best_model_name = model_name
                 best_model_pipeline = pipeline
 
     joblib.dump(best_model_pipeline, MODEL_OUTPUT_PATH)
 
+    model_info = {
+        "model_name": best_model_name,
+        "accuracy": best_accuracy,
+        "f1_macro": best_f1_macro
+    }
+
+    with open(MODEL_INFO_PATH, "w", encoding="utf-8") as f:
+        json.dump(model_info, f, indent=4, ensure_ascii=False)
+
     print("\n" + "=" * 50)
     print(f"Melhor modelo: {best_model_name}")
+    print(f"Melhor Accuracy: {best_accuracy:.4f}")
     print(f"Melhor F1 Macro: {best_f1_macro:.4f}")
     print(f"Modelo salvo em: {MODEL_OUTPUT_PATH}")
+    print(f"Informações do modelo salvas em: {MODEL_INFO_PATH}")
 
 
 if __name__ == "__main__":
