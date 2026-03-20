@@ -1,9 +1,9 @@
 __pycache__/
 *.pyc
+.ipynb_checkpoints/
+mlruns/
+mlflow.db
 .venv/
 venv/
 .env
-.ipynb_checkpoints/
-mlruns/
-.DS_Store
-mlflow.db
+.git/
