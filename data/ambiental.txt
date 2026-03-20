@@ -1,0 +1,14 @@
+Variáveis:
+
+Temperatura (°C) – medida da temperatura ambiente.
+Umidade Relativa (%) – proporção de vapor d’água no ar.
+CO₂ (ppm) – concentração de dióxido de carbono.
+CO (ppm) – concentração de monóxido de carbono.
+Pressão Atmosférica (hPa) – pressão do ar ao nível do solo.
+NO₂ (ppb) – concentração de dióxido de nitrogênio.
+SO₂ (ppb) – concentração de dióxido de enxofre.
+O₃ (ppb) – concentração de ozônio troposférico.
+
+Classe de Qualidade Ambiental
+
+Qualidade_Ambiental
