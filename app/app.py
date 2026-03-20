@@ -1,4 +1,5 @@
 import json
+
 import joblib
 import pandas as pd
 import streamlit as st
@@ -76,30 +77,30 @@ def get_result_style(prediction: str):
     styles = {
         "Excelente": {
             "color": "#1b8a5a",
-            "message": "O ambiente apresenta condições bastante favoráveis."
+            "message": "O ambiente apresenta condições bastante favoráveis.",
         },
         "Boa": {
             "color": "#2eaf7d",
-            "message": "O ambiente apresenta boas condições gerais."
+            "message": "O ambiente apresenta boas condições gerais.",
         },
         "Moderada": {
             "color": "#d4a017",
-            "message": "Há sinais moderados de atenção nas condições ambientais."
+            "message": "Há sinais moderados de atenção nas condições ambientais.",
         },
         "Ruim": {
             "color": "#d96c06",
-            "message": "O ambiente apresenta sinais relevantes de deterioração."
+            "message": "O ambiente apresenta sinais relevantes de deterioração.",
         },
         "Muito Ruim": {
             "color": "#c0392b",
-            "message": "O ambiente está em condição crítica e exige maior atenção."
+            "message": "O ambiente está em condição crítica e exige maior atenção.",
         },
     }
     return styles.get(
         prediction,
         {
             "color": "#444444",
-            "message": "Resultado gerado pelo modelo."
+            "message": "Resultado gerado pelo modelo.",
         },
     )
 
@@ -126,7 +127,7 @@ def main():
     st.set_page_config(
         page_title="Predição de Qualidade Ambiental",
         page_icon="🌿",
-        layout="wide"
+        layout="wide",
     )
 
     st.title("Predição de Qualidade Ambiental")
@@ -163,7 +164,7 @@ def main():
     st.sidebar.header("Entradas do Sistema")
     scenario_name = st.sidebar.selectbox(
         "Escolha um cenário",
-        list(SCENARIOS.keys())
+        list(SCENARIOS.keys()),
     )
     selected = SCENARIOS[scenario_name]
 
@@ -242,7 +243,7 @@ def main():
                     {prediction}
                 </div>
                 """,
-                unsafe_allow_html=True
+                unsafe_allow_html=True,
             )
 
             st.info(style["message"])
@@ -254,7 +255,7 @@ def main():
                 proba_df = pd.DataFrame(
                     {
                         "Classe": class_names,
-                        "Probabilidade": probabilities
+                        "Probabilidade": probabilities,
                     }
                 ).sort_values("Probabilidade", ascending=False)
 
@@ -263,7 +264,7 @@ def main():
                 st.subheader("Probabilidades por classe")
                 st.bar_chart(
                     proba_df.set_index("Classe")["Probabilidade"],
-                    use_container_width=True
+                    use_container_width=True,
                 )
                 st.dataframe(proba_df, use_container_width=True)
 

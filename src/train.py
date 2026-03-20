@@ -1,20 +1,21 @@
-import os
 import json
+import os
+
 import joblib
 import mlflow
 import mlflow.sklearn
 
-from sklearn.pipeline import Pipeline
-from sklearn.metrics import accuracy_score, f1_score, classification_report
+from sklearn.ensemble import GradientBoostingClassifier, RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
-from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
+from sklearn.metrics import accuracy_score, classification_report, f1_score
+from sklearn.pipeline import Pipeline
 
 from data_prep import (
-    load_data,
+    build_preprocessor,
     clean_data,
+    load_data,
     split_features_target,
     split_train_test,
-    build_preprocessor,
 )
 
 
@@ -32,12 +33,12 @@ def evaluate_model(model, X_test, y_test):
 
     accuracy = accuracy_score(y_test, y_pred)
     f1_macro = f1_score(y_test, y_pred, average="macro")
-    report = classification_report(y_test, y_pred)
+    report = classification_report(y_test, y_pred, zero_division=0)
 
     return {
         "accuracy": accuracy,
         "f1_macro": f1_macro,
-        "report": report
+        "report": report,
     }
 
 
@@ -56,7 +57,7 @@ def main():
         "logistic_regression": LogisticRegression(max_iter=1000),
         "random_forest": RandomForestClassifier(
             n_estimators=200,
-            random_state=42
+            random_state=42,
         ),
         "gradient_boosting": GradientBoostingClassifier(random_state=42),
     }
@@ -65,20 +66,19 @@ def main():
 
     best_model_name = None
     best_model_pipeline = None
-    best_f1_macro = -1
-    best_accuracy = -1
+    best_f1_macro = -1.0
+    best_accuracy = -1.0
 
     for model_name, model in models.items():
         with mlflow.start_run(run_name=model_name):
             pipeline = Pipeline(
                 steps=[
                     ("preprocessor", preprocessor),
-                    ("model", model)
+                    ("model", model),
                 ]
             )
 
             pipeline.fit(X_train, y_train)
-
             metrics = evaluate_model(pipeline, X_test, y_test)
 
             mlflow.log_param("model_name", model_name)
@@ -96,7 +96,7 @@ def main():
             mlflow.log_metric("accuracy", metrics["accuracy"])
             mlflow.log_metric("f1_macro", metrics["f1_macro"])
 
-            mlflow.sklearn.log_model(pipeline, artifact_path="model")
+            mlflow.sklearn.log_model(pipeline, name="model")
 
             print(f"\nModelo: {model_name}")
             print(f"Accuracy: {metrics['accuracy']:.4f}")
@@ -115,7 +115,7 @@ def main():
     model_info = {
         "model_name": best_model_name,
         "accuracy": best_accuracy,
-        "f1_macro": best_f1_macro
+        "f1_macro": best_f1_macro,
     }
 
     with open(MODEL_INFO_PATH, "w", encoding="utf-8") as f:

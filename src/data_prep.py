@@ -1,9 +1,9 @@
 import pandas as pd
 
-from sklearn.model_selection import train_test_split
-from sklearn.pipeline import Pipeline
 from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
+from sklearn.model_selection import train_test_split
+from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 
 
@@ -14,8 +14,7 @@ def load_data(filepath: str) -> pd.DataFrame:
     """
     Carrega o dataset a partir de um arquivo CSV.
     """
-    df = pd.read_csv(filepath)
-    return df
+    return pd.read_csv(filepath)
 
 
 def clean_data(df: pd.DataFrame) -> pd.DataFrame:
@@ -44,14 +43,13 @@ def split_train_test(X, y, test_size: float = 0.2, random_state: int = 42):
     """
     Divide os dados em treino e teste com estratificação na variável alvo.
     """
-    X_train, X_test, y_train, y_test = train_test_split(
+    return train_test_split(
         X,
         y,
         test_size=test_size,
         random_state=random_state,
-        stratify=y
+        stratify=y,
     )
-    return X_train, X_test, y_train, y_test
 
 
 def build_preprocessor(X: pd.DataFrame) -> ColumnTransformer:
@@ -67,17 +65,15 @@ def build_preprocessor(X: pd.DataFrame) -> ColumnTransformer:
     numeric_pipeline = Pipeline(
         steps=[
             ("imputer", SimpleImputer(strategy="median")),
-            ("scaler", StandardScaler())
+            ("scaler", StandardScaler()),
         ]
     )
 
-    preprocessor = ColumnTransformer(
+    return ColumnTransformer(
         transformers=[
-            ("num", numeric_pipeline, numeric_features)
+            ("num", numeric_pipeline, numeric_features),
         ]
     )
-
-    return preprocessor
 
 
 if __name__ == "__main__":
@@ -95,3 +91,4 @@ if __name__ == "__main__":
     print("Formato de X_test:", X_test.shape)
     print("Classes da variável alvo:")
     print(y.value_counts())
+    print("Pré-processador criado com sucesso:", preprocessor)

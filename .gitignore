@@ -5,5 +5,7 @@ venv/
 .env
 .ipynb_checkpoints/
 mlruns/
-.DS_Store
 mlflow.db
+models/*.pkl
+models/model_info.json
+.DS_Store
