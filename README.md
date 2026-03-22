@@ -239,11 +239,17 @@ Depois, acesse no navegador:
 http://127.0.0.1:5000
 ```
 
-### 5. Executar a aplicação web
+### 5. Executar a aplicação web ou acessar localmente
 
 A aplicação está disponível publicamente em:
 
 https://huggingface.co/spaces/matheusdc1/qualidade-ambiental-ml
+
+Para acessar localmente execute o comando no terminal:
+
+```bash
+streamlit run app/app.py
+```
 
 ## Como Usar a Aplicação
 
