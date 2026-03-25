@@ -21,6 +21,7 @@ from data_prep import (
     split_features_target,
     split_train_test,
 )
+from xgb_label_wrapper import XGBLabelWrapper
 
 
 DATA_PATH = "data/dataset_ambiental.csv"
@@ -46,6 +47,37 @@ def evaluate_model(model, X_test, y_test):
     }
 
 
+def log_model_params(model_name: str):
+    if model_name in ["logistic_regression", "logistic_regression_balanced"]:
+        mlflow.log_param("max_iter", 1000)
+        if model_name == "logistic_regression_balanced":
+            mlflow.log_param("class_weight", "balanced")
+
+    if model_name == "random_forest":
+        mlflow.log_param("n_estimators", 200)
+        mlflow.log_param("random_state", 42)
+
+    if model_name == "random_forest_balanced":
+        mlflow.log_param("n_estimators", 300)
+        mlflow.log_param("random_state", 42)
+        mlflow.log_param("class_weight", "balanced")
+        mlflow.log_param("min_samples_leaf", 2)
+
+    if model_name == "gradient_boosting":
+        mlflow.log_param("random_state", 42)
+
+    if model_name == "hist_gradient_boosting":
+        mlflow.log_param("random_state", 42)
+
+    if model_name == "xgboost":
+        mlflow.log_param("n_estimators", 250)
+        mlflow.log_param("max_depth", 5)
+        mlflow.log_param("learning_rate", 0.08)
+        mlflow.log_param("subsample", 0.9)
+        mlflow.log_param("colsample_bytree", 0.9)
+        mlflow.log_param("random_state", 42)
+
+
 def main():
     os.makedirs("models", exist_ok=True)
 
@@ -61,7 +93,7 @@ def main():
         "logistic_regression": LogisticRegression(max_iter=1000),
         "logistic_regression_balanced": LogisticRegression(
             max_iter=1000,
-            class_weight="balanced"
+            class_weight="balanced",
         ),
         "random_forest": RandomForestClassifier(
             n_estimators=200,
@@ -75,6 +107,15 @@ def main():
         ),
         "gradient_boosting": GradientBoostingClassifier(random_state=42),
         "hist_gradient_boosting": HistGradientBoostingClassifier(random_state=42),
+        "xgboost": XGBLabelWrapper(
+            n_estimators=250,
+            max_depth=5,
+            learning_rate=0.08,
+            subsample=0.9,
+            colsample_bytree=0.9,
+            random_state=42,
+            n_jobs=1,
+        ),
     }
 
     mlflow.set_experiment(EXPERIMENT_NAME)
@@ -97,32 +138,9 @@ def main():
             metrics = evaluate_model(pipeline, X_test, y_test)
 
             mlflow.log_param("model_name", model_name)
-
-            if model_name in ["logistic_regression", "logistic_regression_balanced"]:
-                mlflow.log_param("max_iter", 1000)
-                if model_name == "logistic_regression_balanced":
-                    mlflow.log_param("class_weight", "balanced")
-
-            if model_name == "random_forest":
-                mlflow.log_param("n_estimators", 200)
-                mlflow.log_param("random_state", 42)
-
-            if model_name == "random_forest_balanced":
-                mlflow.log_param("n_estimators", 300)
-                mlflow.log_param("random_state", 42)
-                mlflow.log_param("class_weight", "balanced")
-                mlflow.log_param("min_samples_leaf", 2)
-
-            if model_name == "gradient_boosting":
-                mlflow.log_param("random_state", 42)
-
-            if model_name == "hist_gradient_boosting":
-                mlflow.log_param("random_state", 42)
-
+            log_model_params(model_name)
             mlflow.log_metric("accuracy", metrics["accuracy"])
             mlflow.log_metric("f1_macro", metrics["f1_macro"])
-
-           # mlflow.sklearn.log_model(pipeline, name="model")
 
             print(f"\nModelo: {model_name}")
             print(f"Accuracy: {metrics['accuracy']:.4f}")

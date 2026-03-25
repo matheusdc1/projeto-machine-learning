@@ -1,4 +1,4 @@
-﻿---
+﻿﻿---
 title: Qualidade Ambiental ML
 emoji: 🌿
 colorFrom: green
@@ -96,6 +96,7 @@ Foram treinados e comparados os seguintes modelos:
 - Random Forest com balanceamento de classes
 - Gradient Boosting
 - HistGradientBoosting
+- XGBoost
 
 As métricas principais utilizadas foram:
 
@@ -104,10 +105,10 @@ As métricas principais utilizadas foram:
 
 A escolha do melhor modelo foi baseada principalmente no **F1 Macro**, por ser mais adequado para um cenário com classes desbalanceadas.
 
-Na versão final do projeto, o melhor desempenho foi obtido com o modelo **HistGradientBoostingClassifier**, alcançando:
+Na versão final do projeto, o melhor desempenho foi obtido com o modelo **XGBoost**, alcançando:
 
-- `Accuracy`: **0.9275**
-- `F1 Macro`: **0.6724**
+- `Accuracy`: **0.9405**
+- `F1 Macro`: **0.8269**
 
 ### Comparação final dos modelos
 
@@ -118,7 +119,8 @@ Na versão final do projeto, o melhor desempenho foi obtido com o modelo **HistG
 | Random Forest | 0.9065 | 0.5670 |
 | Random Forest com balanceamento | 0.9190 | 0.6291 |
 | Gradient Boosting | 0.9205 | 0.5968 |
-| HistGradientBoosting | **0.9275** | **0.6724** |
+| HistGradientBoosting | 0.9275 | 0.6724 |
+| XGBoost | **0.9405** | **0.8269** |
 
 ### Interpretação dos resultados
 
@@ -274,9 +276,9 @@ Entre os principais resultados obtidos:
 
 ### Melhor modelo final
 
-- Modelo: `hist_gradient_boosting`
-- Accuracy: `0.9275`
-- F1 Macro: `0.6724`
+- Modelo: `xgboost`
+- Accuracy: `0.9405`
+- F1 Macro: `0.8269`
 
 ## Limitações e Trabalhos Futuros
 
@@ -298,7 +300,7 @@ Como possibilidades de evolução futura, poderiam ser exploradas:
 
 O projeto atendeu à proposta de construir um pipeline completo de Machine Learning, passando por todas as etapas centrais de um fluxo real: análise exploratória, preparação dos dados, modelagem, rastreamento de experimentos, escolha do melhor modelo, criação de interface e deploy público.
 
-Além disso, a segunda rodada de experimentos contribuiu para melhorar o desempenho do sistema, resultando na escolha do modelo `HistGradientBoosting`, que apresentou o melhor equilíbrio entre desempenho global e qualidade de classificação entre as diferentes classes.
+Além disso, a etapa de experimentação e comparação de modelos contribuiu para a escolha do modelo `XGBoost`, que apresentou o melhor desempenho geral e o maior `F1 Macro` entre os modelos avaliados.
 
 ## Checklist do Projeto
 

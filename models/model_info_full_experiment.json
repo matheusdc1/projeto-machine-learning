@@ -1,0 +1,56 @@
+{
+    "model_name": "xgboost",
+    "accuracy": 0.9405,
+    "f1_macro": 0.8269384449333218,
+    "results": [
+        {
+            "model_name": "logistic_regression",
+            "accuracy": 0.763,
+            "f1_macro": 0.4675822474006731
+        },
+        {
+            "model_name": "random_forest_balanced",
+            "accuracy": 0.919,
+            "f1_macro": 0.629065612136809
+        },
+        {
+            "model_name": "hist_gradient_boosting",
+            "accuracy": 0.9275,
+            "f1_macro": 0.6723598553063083
+        },
+        {
+            "model_name": "hist_gradient_boosting_smote",
+            "accuracy": 0.9435,
+            "f1_macro": 0.675584413943702
+        },
+        {
+            "model_name": "xgboost",
+            "accuracy": 0.9405,
+            "f1_macro": 0.8269384449333218
+        },
+        {
+            "model_name": "hist_gradient_boosting_tuned",
+            "accuracy": 0.9465,
+            "f1_macro": 0.6843557529822777
+        },
+        {
+            "model_name": "hist_gradient_boosting_smote_tuned",
+            "accuracy": 0.946,
+            "f1_macro": 0.7768821679080026
+        }
+    ],
+    "best_params_plain": {
+        "model__min_samples_leaf": 10,
+        "model__max_iter": 200,
+        "model__max_depth": null,
+        "model__learning_rate": 0.05,
+        "model__l2_regularization": 1.0
+    },
+    "best_params_smote": {
+        "model__min_samples_leaf": 20,
+        "model__max_iter": 300,
+        "model__max_depth": 3,
+        "model__learning_rate": 0.1,
+        "model__l2_regularization": 0.0
+    }
+}

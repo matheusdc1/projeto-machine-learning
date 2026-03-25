@@ -1,5 +1,5 @@
 {
-    "model_name": "hist_gradient_boosting",
-    "accuracy": 0.9275,
-    "f1_macro": 0.6723598553063083
+    "model_name": "xgboost",
+    "accuracy": 0.9405,
+    "f1_macro": 0.8269384449333218
 }

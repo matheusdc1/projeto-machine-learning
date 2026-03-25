@@ -1,0 +1,5 @@
+{
+    "model_name": "hist_gradient_boosting_smote",
+    "accuracy": 0.9435,
+    "f1_macro": 0.675584413943702
+}
