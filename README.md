@@ -155,11 +155,11 @@ A interface também exibe:
 
 
 - Tela inicial da aplicação
-  <img src="https://i.imgur.com/MYoOAEh.png" alt="Tela inicial" />
+  <img src="https://i.imgur.com/ReEeOlM.png" alt="Tela inicial" />
 - Print de uma previsão realizada
-  <img src="https://i.imgur.com/9VfaH2c.png" alt="Previsao" />
+  <img src="https://i.imgur.com/zde6DXK.png" alt="Previsao" />
 - Print do gráfico de probabilidades por classe
-  <img src="https://i.imgur.com/GoIdgab.png" alt="Grafico" />
+  <img src="https://i.imgur.com/p2PvNX2.png" alt="Grafico" />
   
 Além disso, a página contém o aviso obrigatório da atividade:
 
